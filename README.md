@@ -60,55 +60,6 @@ Develop a backend system for an e-commerce platform using Python and Django. The
   - Endpoint: `/order/`
   - Method: POST
 
-- **List Users**: Fetches a list of all users registered in the system.
-  - Endpoint: `/users/`
-  - Method: GET
-
-- **Allauth Accounts**: Integrates Django Allauth for user authentication and account management, including features like sign-up, login, password reset, etc.
-  - Endpoint: `/accounts/`
-  - Method: GET, POST, PUT, DELETE
-
-This endpoint includes various sub-endpoints provided by Django Allauth for user account management, such as:
-
-  - **Signup**: Allows users to register/sign up for a new account using email and password.
-    - Endpoint: `/accounts/signup/`
-    - Method: POST
-
-  - **Login**: Enables users to log in to their existing accounts using their credentials.
-    - Endpoint: `/accounts/login/`
-    - Method: POST
-
-  - **Logout**: Logs out the currently authenticated user.
-    - Endpoint: `/accounts/logout/`
-    - Method: POST
-
-  - **Password Reset**: Allows users to request a password reset if they have forgotten their password.
-    - Endpoint: `/accounts/password/reset/`
-    - Method: POST
-
-  - **Password Change**: Allows users to change their passwords after logging in.
-    - Endpoint: `/accounts/password/change/`
-    - Method: POST
-
-  - **Email Confirmation**: Handles email confirmation for user accounts.
-    - Endpoint: `/accounts/confirm-email/`
-    - Method: GET
-
-  - **Email Verification Sent**: Notifies users that an email verification link has been sent to their email.
-    - Endpoint: `/accounts/email/`
-    - Method: GET
-
-  - **Email Change**: Allows users to change the email associated with their account.
-    - Endpoint: `/accounts/email/change/`
-    - Method: POST
-
-  - **Social Account Connections**: Integrates social account connections, such as Google OAuth 2, for sign-up and login.
-    - Endpoint: `/accounts/social/connections/`
-    - Method: GET, POST, PUT, DELETE
-
-  - **Profile Edit**: Allows users to edit their profile information.
-    - Endpoint: `/accounts/profile/`
-    - Method: GET, PUT, DELETE
 
 ## Dependencies
 
@@ -125,7 +76,7 @@ This endpoint includes various sub-endpoints provided by Django Allauth for user
 
 ## Running the Project Locally
 
-To run the e_commerce_1 project locally, follow these steps:
+To run the ecommerce_backend project locally, follow these steps:
 
 ### Prerequisites
 
@@ -136,13 +87,13 @@ To run the e_commerce_1 project locally, follow these steps:
 1. Clone this repository to your local machine:
 
    
-   git clone https://github.com/folder-name/e_commerce_1.git
+   git clone https://github.com/arpita-tudip/E-Commerce-Backend.git
    
 
 2. Navigate to the project directory:
 
    
-   cd e_commerce_1
+   cd ecommerce_backend
    
 
 3. Create a virtual environment (optional but recommended):

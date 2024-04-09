@@ -85,7 +85,7 @@ def add_to_cart(request):
     serializer = CartSerializer(cart)
     return Response(serializer.data)
 
-# @swagger_auto_schema(method='get', operation_description="View the user's shopping cart")
+@swagger_auto_schema(method='get', operation_description="View the user's shopping cart")
 @api_view(['GET'])
 def view_cart(request):
     """
