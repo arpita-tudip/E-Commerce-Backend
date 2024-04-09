@@ -61,7 +61,30 @@ def product_create(request):
         return Response(serializer.data, status=201)
     return Response(serializer.errors, status=400)
 
-@swagger_auto_schema(method='put', operation_description="Update an existing product")
+
+
+
+# @swagger_auto_schema(method='put', operation_description="Update an existing product")
+product_update_schema = {
+    "name": openapi.Schema(type=openapi.TYPE_STRING, description="New product name"),
+    "description": openapi.Schema(type=openapi.TYPE_STRING, description="New product description"),
+    "price": openapi.Schema(type=openapi.TYPE_NUMBER, description="New product price"),
+    "stock_quantity": openapi.Schema(type=openapi.TYPE_INTEGER, description="New stock quantity"),
+    "categories": openapi.Schema(
+        type=openapi.TYPE_ARRAY,
+        items=openapi.Items(type=openapi.TYPE_INTEGER),
+        description="List of category IDs the product belongs to"
+    )
+}
+
+@swagger_auto_schema(
+    method='put',
+    request_body=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        properties=product_update_schema,
+        required=["name", "description", "price", "stock_quantity", "categories"]
+    )
+)
 @api_view(['PUT'])
 def product_update(request, pk):
     """
