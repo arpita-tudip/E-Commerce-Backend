@@ -106,3 +106,68 @@ def product_delete(request, pk):
     product = get_object_or_404(Product, pk=pk)
     product.delete()
     return Response(status=204)
+
+
+
+
+
+
+
+
+@swagger_auto_schema(method='post', request_body=openapi.Schema(
+    type=openapi.TYPE_OBJECT,
+    properties={'name': openapi.Schema(type=openapi.TYPE_STRING, description="Category name")},
+    required=["name"]
+))
+@api_view(['POST'])
+def create_category(request):
+    """
+    Create a new category.
+    """
+    serializer = CategorySerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
+
+
+@swagger_auto_schema(method='get', operation_description="List all categories")
+@api_view(['GET'])
+def list_categories(request):
+    """
+    List all categories.
+    """
+    categories = Category.objects.all()
+    serializer = CategorySerializer(categories, many=True)
+    return Response(serializer.data)
+
+
+
+@swagger_auto_schema(method='put', request_body=openapi.Schema(
+    type=openapi.TYPE_OBJECT,
+    properties={'name': openapi.Schema(type=openapi.TYPE_STRING, description="Updated category name")},
+    required=["name"]
+))
+@api_view(['PUT'])
+def update_category(request, pk):
+    """
+    Update an existing category.
+    """
+    category = get_object_or_404(Category, pk=pk)
+    serializer = CategorySerializer(category, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=400)
+
+
+
+@swagger_auto_schema(method='delete', operation_description="Delete a category by ID")
+@api_view(['DELETE'])
+def delete_category(request, pk):
+    """
+    Delete an existing category by ID.
+    """
+    category = get_object_or_404(Category, pk=pk)
+    category.delete()
+    return Response(status=204)

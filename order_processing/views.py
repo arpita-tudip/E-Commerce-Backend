@@ -171,7 +171,18 @@ def update_cart(request):
     serializer = CartSerializer(cart)
     return Response(serializer.data)
 
-@swagger_auto_schema(method='delete', operation_description="Remove a product from the user's cart")
+
+
+
+delete_cart_schema = {
+    "product_id": openapi.Schema(type=openapi.TYPE_INTEGER, description="ID of the product to be removed from the cart"),
+}
+
+@swagger_auto_schema(method='delete', operation_description="Remove a product from the user's cart", request_body=openapi.Schema(
+    type=openapi.TYPE_OBJECT,
+    properties=delete_cart_schema,
+    required=["product_id"]
+))
 @api_view(['DELETE'])
 def delete_cart(request):
     """
@@ -187,11 +198,13 @@ def delete_cart(request):
 
     product_id = data.get('product_id')
 
-    try:
-        cart_item = CartItem.objects.get(cart=cart, product_id=product_id)
-        cart_item.delete()
-    except CartItem.DoesNotExist:
+    # Filter cart items by product_id
+    cart_items = CartItem.objects.filter(cart=cart, product_id=product_id)
+    if not cart_items.exists():
         return Response({"error": "Item not found in cart"}, status=status.HTTP_404_NOT_FOUND)
+
+    # Delete all matching cart items
+    cart_items.delete()
 
     serializer = CartSerializer(cart)
     return Response(serializer.data)
