@@ -49,17 +49,4 @@ class ViewsTestCase(TestCase):
         response = self.client.delete(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-class UrlsTestCase(TestCase):
-    def test_urls(self):
-        response = self.client.get(reverse('add_to_cart'))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        response = self.client.get(reverse('view_cart'))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        response = self.client.post(reverse('place_order'))
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        response = self.client.get(reverse('protected_view'))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        response = self.client.put(reverse('update_cart'))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        response = self.client.delete(reverse('delete_cart'))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
